@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Formulario de Persona</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="personaForm" (ngSubmit)="onSubmit()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">RUT</ion-label>
+        <ion-input formControlName="rut"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input formControlName="nombre"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Apellido Paterno</ion-label>
+        <ion-input formControlName="apellido_paterno"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Apellido Materno</ion-label>
+        <ion-input formControlName="apellido_materno"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Correo</ion-label>
+        <ion-input type="email" formControlName="correo"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Region</ion-label>
+        <ion-input formControlName="region"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-button
+      expand="block"
+      type="submit"
+      [disabled]="isSubmitting"
+      class="ion-margin-top"
+    >
+      {{ isSubmitting ? 'Guardando...' : 'Guardar' }}
+    </ion-button>
+
+  </form>
+
+  <ion-text *ngIf="mensaje" class="ion-text-center ion-margin-top">
+    <p>{{ mensaje }}</p>
+  </ion-text>
+
+  <ion-text *ngIf="errorMsg" class="ion-text-center ion-margin-top">
+    <p>{{ errorMsg }}</p>
+  </ion-text>
+
+  <h2>Usuarios registrados</h2>
+  <ion-list *ngIf="persona.length > 0">
+    <ion-item *ngFor="let persona of persona">
+      <ion-label>
+        <h2>{{ persona.nombre }}</h2>
+        <p>{{ persona.apellido_paterno }}</p>
+        <p>{{ persona.apellido_materno }}</p>
+        <p>{{ persona.correo }}</p>
+        <p>{{ persona.region }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-text *ngIf="persona.length === 0" class="ion-text-center ion-margin-top">
+    <p>No hay usuarios registrados</p>
+  </ion-text>
+
+</ion-content>
